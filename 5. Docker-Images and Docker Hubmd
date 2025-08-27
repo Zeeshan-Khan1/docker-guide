@@ -1,0 +1,122 @@
+# 17. Introduction to Docker Images
+
+## What it means:
+- Docker Image = a **blueprint** of your application.
+- It contains:
+  - App code
+  - Dependencies
+  - Configuration
+  - Base OS layer
+
+## How it works:
+1. Write a `Dockerfile`.
+2. Build an **Image** using `docker build`.
+3. Run a **Container** from the Image using `docker run`.
+
+### Diagram:
+[Dockerfile] → (docker build) → [Image] → (docker run) → [Container]\
+
+18-Docker-Hub
+markdown
+Copy code
+# 18. Demo: A quick look at Docker Hub
+
+## What is Docker Hub?
+- A cloud registry for sharing and downloading images.
+- Default registry used by Docker.
+
+## Work:
+1. Search images:  
+   ```bash
+   docker search ubuntu
+Pull image:
+
+bash
+Copy code
+docker pull ubuntu:20.04
+Run container:
+
+bash
+Copy code
+docker run -it ubuntu:20.04 bash
+Push image (after login):
+
+bash
+Copy code
+docker login
+docker tag my-app username/my-app:v1
+docker push username/my-app:v1
+Diagram:
+[User] ↔ [Docker Hub] ↔ [Images & Containers]
+
+yaml
+Copy code
+
+---
+
+#### `19-Docker-Images-Commands
+```markdown
+# 19. Demo: Working with Docker Images
+
+## Commands:
+
+- **List images:**
+  ```bash
+  docker images
+Search for images:
+
+bash
+Copy code
+docker search nginx
+Pull image:
+
+bash
+Copy code
+docker pull nginx:latest
+Run image:
+
+bash
+Copy code
+docker run -d -p 8080:80 nginx
+Tag image:
+
+bash
+Copy code
+docker tag nginx my-nginx:v1
+Push image:
+
+bash
+Copy code
+docker push username/my-nginx:v1
+Example Flow:
+bash
+Copy code
+docker search alpine
+docker pull alpine:latest
+docker run -it alpine:latest sh
+docker tag alpine username/alpine-test:v1
+docker push username/alpine-test:v1
+yaml
+Copy code
+
+---
+
+#### `20-Inspect-History
+```markdown
+# 20. Demo: Know your Docker Image (Inspect & History)
+
+## Inspect an image:
+```bash
+docker inspect nginx:latest
+Shows metadata (layers, env variables, ports, etc.).
+
+View history of an image:
+bash
+Copy code
+docker history nginx:latest
+Shows the commands used to build the image.
+
+Example Output:
+docker inspect → JSON details
+
+docker history → Layer-by-layer instructions
